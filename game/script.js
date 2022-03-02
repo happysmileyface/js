@@ -2,6 +2,7 @@ var win = false
 const word = "words"
 var x = 1
 row = "row"+String(x);
+help_list = []
 function test(){
     console.log("button #2 worked");
 }
@@ -22,24 +23,33 @@ function process(guess){
         shown_word = guess.split();
         if (guess.length != 5){
             ask()
-        }
-        for (let i = 0; i < guess.length; i++){
+        }//it writes !? to shown_word[4] because guess[4] is a good letter and doesnt write to the next up index
+        // because it checks for guess[i(which is equal to 4) and write to shown_word[i(which is still equal to 4)]]
+        count = 1
+        for (let i = 0; i < 5; i++){
             if (word.includes(guess[i])){
-                shown_word[i+1] = String(guess[i])+"[!?]";
+                shown_word[count] = String(guess[i])+"[!?]";
             }
             if (guess[i] == word[i]){
-                shown_word[i+1] = String(guess[i])+"[!!]";
+                shown_word[count] = String(guess[i])+"[!!]";
             }
+            if (shown_word[count] != undefined){
+                count=count+1
+            } 
         }
         if (shown_word != null){
             document.getElementById(row).innerHTML = String(shown_word[0]);
         }
         console.log("it continued")
-        for (let i = 1; i < shown_word[shown_word.length]; i++){
-                help_list =+ shown_word[i];
-                console.log(shown_word[i]+" is the help list["+String(i)+"]");
+        for (let i = 1; i < Object.keys(shown_word).length; i++){
+                if (help_list.includes(shown_word[i])==false){
+                    help_list = String(help_list) + String(shown_word[i]);
+                }
+                console.log(shown_word[i]+" is the help list["+String(i)+"]")
         }
+        console.log(help_list+"is help_list");
         x = x + 1;
-        console.log(String(shown_word));
+        console.log(String(shown_word[0])+" is shown_word[0]");
+        console.log("there are "+String(Object.keys(shown_word).length)+" indexes in shown_word")
     }
 }
