@@ -10,10 +10,11 @@ function ask(){
     if (win==false){
         guess = prompt("Enter your guess", "Enter a 5 letter Word");
         if (guess != null){
+        guess = guess.toLowerCase()
             if (guess == word){
                 document.getElementById(row).innerHTML = "You Won";
             }else{
-                process(guess)
+                  process(guess)
             }
         }
     }
@@ -47,6 +48,10 @@ function process(guess){
                 }
                 console.log(shown_word[i]+" is the help list["+String(i)+"]")
         }
+        if ("row1"!=row){
+            document.getElementById(row).innerHTML
+        }
+        
         console.log(help_list+"is help_list");
         x = x + 1;
         console.log(String(shown_word[0])+" is shown_word[0]");
